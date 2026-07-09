@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adeel Trader | King of OTC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0a0d14;
+    --bg-panel:#11151f;
+    --gold:#d4af37;
+    --gold-bright:#f3d878;
+    --green:#1fae67;
+    --red:#e0435a;
+    --text-soft:#c7cdda;
+    --line:rgba(212,175,55,0.25);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+
+  body{
+    min-height:100vh;
+    background:var(--bg-deep);
+    color:var(--text-soft);
+    font-family:'Rajdhani', sans-serif;
+    display:flex;
+    justify-content:center;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  .page{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:440px;
+    padding:38px 20px 50px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:100vh;
+  }
+
+  /* Logos row */
+  .logo-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
+    margin-bottom:18px;
+  }
+  .logo-badge{
+    width:64px; height:64px;
+    border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    box-shadow:0 0 24px rgba(212,175,55,0.15);
+  }
+  .logo-badge svg{width:36px; height:36px;}
+
+  .crown-divider{
+    color:var(--gold);
+    font-size:20px;
+    opacity:0.7;
+  }
+
+  /* Name */
+  h1.brand{
+    font-family:'Cinzel', serif;
+    font-weight:900;
+    font-size:clamp(28px, 8vw, 38px);
+    letter-spacing:1px;
+    margin:6px 0 2px;
+    text-align:center;
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold) 60%, #a67f22);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 30px rgba(212,175,55,0.25);
+  }
+  .brand-sub{
+    font-size:13px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--gold);
+    opacity:0.75;
+    margin-bottom:30px;
+  }
+
+  /* Buttons */
+  .btn-stack{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-bottom:34px;
+  }
+  .action-btn{
+    position:relative;
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:16px 18px;
+    border-radius:14px;
+    border:1px solid var(--line);
+    background:linear-gradient(180deg, #151a26, #0d1017);
+    color:#fff;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    font-size:17px;
+    letter-spacing:0.4px;
+    cursor:pointer;
+    overflow:hidden;
+    isolation:isolate;
+    transition:transform .15s ease, box-shadow .25s ease, border-color .25s ease;
+    text-decoration:none;
+  }
+  .action-btn:active{transform:scale(0.96);}
+  .action-btn:hover{
+    border-color:var(--gold);
+    box-shadow:0 0 18px rgba(212,175,55,0.2);
+  }
+
+  /* Color-pop burst on touch/click */
+  .burst{
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+    transform:translate(-50%,-50%) scale(0);
+    animation:burstPop 0.6s ease-out forwards;
+  }
+  @keyframes burstPop{
+    0%{transform:translate(-50%,-50%) scale(0); opacity:0.9;}
+    70%{opacity:0.5;}
+    100%{transform:translate(-50%,-50%) scale(1); opacity:0;}
+  }
+  .action-btn .icon-wrap{
+    width:38px; height:38px;
+    border-radius:10px;
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .action-btn .icon-wrap svg{width:22px; height:22px;}
+  .action-btn .label{flex:1; text-align:left;}
+  .action-btn .arrow{opacity:0.5; font-size:18px;}
+
+  .btn-telegram .icon-wrap{background:rgba(41,182,246,0.15);}
+  .btn-telegram .icon-wrap svg{fill:#29b6f6;}
+
+  .btn-quotex-create .icon-wrap{background:rgba(31,174,103,0.15);}
+  .btn-quotex-create .icon-wrap svg{fill:var(--green);}
+
+  .btn-contact .icon-wrap{background:rgba(37,211,102,0.15);}
+  .btn-contact .icon-wrap svg{fill:#25d366;}
+
+  .btn-quotex-signup .icon-wrap{background:rgba(212,175,55,0.18);}
+  .btn-quotex-signup .icon-wrap svg{fill:var(--gold);}
+  .btn-quotex-signup{
+    border-color:var(--gold);
+    background:linear-gradient(180deg, #1a1710, #12100a);
+  }
+
+  /* Tagline / footer */
+  .tagline{
+    text-align:center;
+    margin-top:auto;
+    padding-top:10px;
+  }
+  .tagline .crown-icon{
+    width:34px; height:34px;
+    margin-bottom:10px;
+    fill:var(--gold);
+    filter:drop-shadow(0 0 10px rgba(212,175,55,0.4));
+  }
+  .tagline h2{
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--gold-bright);
+    margin:0 0 6px;
+  }
+  .tagline p{
+    font-size:14px;
+    color:var(--text-soft);
+    opacity:0.7;
+    margin:0 0 14px;
+    line-height:1.5;
+  }
+  .badges{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    opacity:0.6;
+  }
+  .badges svg{width:20px; height:20px; fill:var(--gold);}
+
+  /* Loading overlay (3s animation on button click) */
+  .loader-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(10,13,20,0.94);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    z-index:999;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .loader-overlay.show{
+    opacity:1;
+    pointer-events:all;
+  }
+  .loader-ring{
+    width:64px; height:64px;
+    border-radius:50%;
+    border:3px solid rgba(212,175,55,0.18);
+    border-top-color:var(--gold);
+    animation:spin 0.9s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .loader-text{
+    font-family:'Cinzel', serif;
+    color:var(--gold-bright);
+    letter-spacing:2px;
+    font-size:14px;
+    text-transform:uppercase;
+  }
+  .loader-bar{
+    width:180px; height:4px;
+    background:rgba(255,255,255,0.08);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .loader-bar-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg, var(--gold), var(--green));
+    border-radius:4px;
+  }
+  .loader-overlay.show .loader-bar-fill{
+    animation:fillBar 3s linear forwards;
+  }
+  @keyframes fillBar{
+    from{width:0%;}
+    to{width:100%;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .bar, .loader-ring, .loader-overlay.show .loader-bar-fill{animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Logos -->
+  <div class="logo-row">
+    <div class="logo-badge" title="Telegram">
+      <svg viewBox="0 0 240 240"><path fill="#29b6f6" d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0z"/><path fill="#fff" d="M54.8 118.5l142-54.8c6.6-2.5 12.3 1.6 10.2 11.5l-24.2 114.1c-1.8 8.3-6.7 10.3-13.6 6.4l-37.6-27.7-18.1 17.4c-2 2-3.7 3.7-7.5 3.7l2.7-38.2 69.5-62.8c3-2.7-.7-4.2-4.6-1.5l-85.9 54.1-37-11.6c-8-2.5-8.2-8 1.7-11.4z"/></svg>
+    </div>
+    <span class="crown-divider">♛</span>
+    <div class="logo-badge" title="Quotex">
+      <img src="https://cdn.bio.link/uploads/profile_pictures/2025-07-25/H9XiU8L9ABDqDR8bYmYebQNSMFqLoKGV.png" alt="Quotex" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+    </div>
+  </div>
+
+  <h1 class="brand">Adeel Trader</h1>
+  <div class="brand-sub">King Of OTC</div>
+
+  <!-- Buttons -->
+  <div class="btn-stack">
+
+    <a href="#" class="action-btn btn-telegram" data-url="https://t.me/+dVkqP4hoQyo3N2Zk">
+      <span class="icon-wrap">
+        <svg viewBox="0 0 240 240"><path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0z" fill="none"/><path d="M54.8 118.5l142-54.8c6.6-2.5 12.3 1.6 10.2 11.5l-24.2 114.1c-1.8 8.3-6.7 10.3-13.6 6.4l-37.6-27.7-18.1 17.4c-2 2-3.7 3.7-7.5 3.7l2.7-38.2 69.5-62.8c3-2.7-.7-4.2-4.6-1.5l-85.9 54.1-37-11.6c-8-2.5-8.2-8 1.7-11.4z"/></svg>
+      </span>
+      <span class="label">Telegram Channel</span>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" class="action-btn btn-quotex-create" data-url="https://broker-qx.pro/?lid=544862">
+      <span class="icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14H8v-6h2v6zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+      </span>
+      <span class="label">Create Quotex Account</span>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" class="action-btn btn-contact" data-url="https://wa.me/92XXXXXXXXXX">
+      <span class="icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.83 14.07c-.24.68-1.4 1.32-1.93 1.4-.49.08-1.11.11-1.79-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.38.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.17.01.41-.07.64.49.24.57.81 1.98.88 2.12.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.28-.12.56.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.61-.07.16-.19.7-.81.89-1.09.19-.28.37-.23.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+      </span>
+      <span class="label">Contact / WhatsApp</span>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="#" class="action-btn btn-quotex-signup" data-url="https://broker-qx.pro/?lid=544862">
+      <span class="icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+      </span>
+      <span class="label">Quotex Signup</span>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- Tagline -->
+  <div class="tagline">
+    <svg class="crown-icon" viewBox="0 0 24 24"><path d="M5 16L3 6l5.5 4L12 4l3.5 6L21 6l-2 10H5zm0 2h14v2H5v-2z"/></svg>
+    <h2>King of OTC</h2>
+    <p>Ek powerful trader &mdash; disciplined strategy, sharp analysis aur consistent results ke sath market ka OTC king.</p>
+    <div class="badges">
+      <svg viewBox="0 0 24 24" title="Trusted"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1.2 14.6L7 11.8l1.4-1.4 2.4 2.4L16.6 7l1.4 1.4-6.2 7.2z"/></svg>
+      <svg viewBox="0 0 24 24" title="Growth"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+      <svg viewBox="0 0 24 24" title="Verified"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+    </div>
+  </div>
+
+</div>
+
+<!-- Loader overlay -->
+<div class="loader-overlay" id="loaderOverlay">
+  <div class="loader-ring"></div>
+  <div class="loader-text">Connecting...</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<script>
+  // Color-pop burst colors per button type
+  const burstColors = {
+    'btn-telegram':'#29b6f6',
+    'btn-quotex-create':'#1fae67',
+    'btn-contact':'#25d366',
+    'btn-quotex-signup':'#d4af37'
+  };
+
+  function spawnBurst(btn, x, y){
+    const color = Object.keys(burstColors).find(cls => btn.classList.contains(cls));
+    const hex = burstColors[color] || '#d4af37';
+    const burst = document.createElement('span');
+    burst.className = 'burst';
+    const size = Math.max(btn.offsetWidth, btn.offsetHeight) * 1.6;
+    burst.style.width = size + 'px';
+    burst.style.height = size + 'px';
+    burst.style.left = x + 'px';
+    burst.style.top = y + 'px';
+    burst.style.background = `radial-gradient(circle, ${hex}55 0%, ${hex}22 45%, transparent 70%)`;
+    btn.appendChild(burst);
+    setTimeout(() => burst.remove(), 650);
+  }
+
+  // Button click -> color pop + 3s loading animation -> open link
+  const overlay = document.getElementById('loaderOverlay');
+  document.querySelectorAll('.action-btn').forEach(btn => {
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      const rect = this.getBoundingClientRect();
+      const x = (e.clientX || rect.left + rect.width/2) - rect.left;
+      const y = (e.clientY || rect.top + rect.height/2) - rect.top;
+      spawnBurst(this, x, y);
+
+      const url = this.getAttribute('data-url');
+      overlay.classList.add('show');
+      setTimeout(() => {
+        overlay.classList.remove('show');
+        window.open(url, '_blank');
+      }, 3000);
+    });
+  });
+</script>
+
+</body>
+</html>
